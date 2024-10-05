@@ -1,10 +1,8 @@
 " autoload/snippet.vim
 function! snippet#InsertSnippet(file)
-    " Get the plugin's base directory using scriptname
-    let l:plugin_dir = expand('<sfile>:p:h:h')  " Goes to the plugin root directory
-    let l:base_path = l:plugin_dir . '/snippets/'  " Base path to the snippets directory
-    let l:file_path = l:base_path . a:file  " Complete path to the snippet file
-
+    " Get the base path of the plugin using scriptpath
+    let l:base_path = fnamemodify(globpath(&rtp, 'snippets'), ':h') . '/'  " Gets the path to the snippets folder
+    let l:file_path = l:base_path . '/snippets/' . a:file
     " Check if the file exists
     if filereadable(l:file_path)
         " Read the content of the file
